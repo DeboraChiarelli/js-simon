@@ -4,40 +4,41 @@ Dopo 30 secondi l’utente deve inserire, uno alla volta, i numeri che ha visto 
 tramite il prompt().
 Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare 
 sono stati individuati.*/
-
+//- Creo funzione per generare numeri random
 function randomNumber(min, max) {
 	return Math.floor(Math.random() * (max - min + 1) + min); 
 }
-
+//- Creo funzione per generare array con i cinque numeri random
 function randomNumbers() {
 	let arrayNumbers = [];
 	while (arrayNumbers.length < 5) {
 		let n = randomNumber(0, 9);
-		if (!arrayNumbers.includes(n)) {
-			arrayNumbers.push(n);
+		if (!arrayNumbers.includes(n)) { //- SE l'array dei numeri non include il numero generato
+			arrayNumbers.push(n); //- ALLORA 
 		}
 	}
 
-	return arrayNumbers;
+	return arrayNumbers; //- faccio ritornare l'array dei numeri
 }
-
+//- Importo il bottone dall'html
 const buttonStartDOMElement = document.getElementById('button-start');
 console.log(buttonStartDOMElement);
+//- Importo il container dei numeri
 const numbersContainerDOMElement = document.getElementById('numbers-container');
 console.log(numbersContainerDOMElement);
-
+//- Associo al bottone l'evento del click, che mi genera in pagina i numeri
 buttonStartDOMElement.addEventListener('click', function() {
 //- Creo i numeri
 let arrayNumbers = randomNumbers();
 console.log(arrayNumbers);
 // - inserisco i numeri che ha generato la funzione randomNumbers
 numbersContainerDOMElement.innerHTML = arrayNumbers;
-let startNumber = 30;
+let startNumber = 30; //- definisco il numero da cui partire
 let idInterval = setInterval(function timeHandler() {
-	if (startNumber === 0) {
-		clearInterval(idInterval);
-	} else {
-		startNumber--
+	if (startNumber === 0) { //- SE il numero iniziale arriva a 0 
+		clearInterval(idInterval); //- ALLORA l'intervallo si deve fermare
+	} else { 
+		startNumber-- //- ALTRIMENTI deve decrescere effettuando il countdown fino ad arrivare a 0
 	}
 }, 1000)
 }) 
