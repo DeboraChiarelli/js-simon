@@ -26,19 +26,28 @@ console.log(buttonStartDOMElement);
 //- Importo il container dei numeri
 const numbersContainerDOMElement = document.getElementById('numbers-container');
 console.log(numbersContainerDOMElement);
+//- Importo il timer dall'html
+const timerDOMElement = document.getElementById('timer');
+console.log(timerDOMElement);
 //- Associo al bottone l'evento del click, che mi genera in pagina i numeri
 buttonStartDOMElement.addEventListener('click', function() {
 //- Creo i numeri
-let arrayNumbers = randomNumbers();
-console.log(arrayNumbers);
+	let arrayNumbers = randomNumbers();
+	console.log(arrayNumbers);
 // - inserisco i numeri che ha generato la funzione randomNumbers
-numbersContainerDOMElement.innerHTML = arrayNumbers;
-let startNumber = 30; //- definisco il numero da cui partire
-let idInterval = setInterval(function timeHandler() {
-	if (startNumber === 0) { //- SE il numero iniziale arriva a 0 
-		clearInterval(idInterval); //- ALLORA l'intervallo si deve fermare
-	} else { 
-		startNumber-- //- ALTRIMENTI deve decrescere effettuando il countdown fino ad arrivare a 0
-	}
-}, 1000)
+	numbersContainerDOMElement.innerHTML = arrayNumbers;
+	setTimeout(function onInterval() {
+		let startNumber = 30; //- definisco il numero da cui partire
+		numbersContainerDOMElement.classList.add('display-none');
+		let idInterval = setInterval(function timeHandler() {
+			if (startNumber === 0) { //- SE il numero iniziale arriva a 0 
+				clearInterval(idInterval); //- ALLORA l'intervallo si deve fermare
+			} else { 
+				timerDOMElement.innerHTML = startNumber;
+				startNumber--; //- ALTRIMENTI deve decrescere effettuando il countdown fino ad arrivare a 0
+			}
+		}, 1000)
+	}, 5000)
+	
 }) 
+
