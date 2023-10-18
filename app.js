@@ -20,6 +20,28 @@ function randomNumbers() {
 
 	return arrayNumbers; //- faccio ritornare l'array dei numeri
 }
+//- Definisco la funzione che mi servirà per definire il punteggio
+function numbersResult(arrayNumbers) {
+	let point = 0;
+	let results = '';
+	let numbersPrompt = [];
+
+	for (let i = 0; i < arrayNumbers.length; i++) {
+		let numberUser = prompt('Inserisci un' + (i + 1) + 'numero');
+		if (numberUser == arrayNumbers[i]) {
+			point++;
+			numbersPrompt.push(numberUser);
+		}
+	}
+
+	results +=
+	'Hai indovinato i numeri (' + point + '/' arrayNumbers.length + '):';
+		for (let i = 0; i < numbersPrompt.length; i++) {
+		results += '' + numbersPrompt[i];
+		}
+	return results;
+
+}
 //- Importo il bottone dall'html
 const buttonStartDOMElement = document.getElementById('button-start');
 console.log(buttonStartDOMElement);
@@ -42,6 +64,7 @@ buttonStartDOMElement.addEventListener('click', function() {
 		let idInterval = setInterval(function timeHandler() {
 			if (startNumber === 0) { //- SE il numero iniziale arriva a 0 
 				clearInterval(idInterval); //- ALLORA l'intervallo si deve fermare
+				console.log(numbersResult(arrayNumbers));
 			} else { 
 				timerDOMElement.innerHTML = startNumber;
 				startNumber--; //- ALTRIMENTI deve decrescere effettuando il countdown fino ad arrivare a 0
@@ -50,4 +73,3 @@ buttonStartDOMElement.addEventListener('click', function() {
 	}, 5000)
 	
 }) 
-
